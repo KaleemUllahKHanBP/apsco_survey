@@ -9,6 +9,7 @@ class EpscoSurveyListData {
   late String transImageName;
   late String sysOnYesGetValue;
   late String sysOnYesGetImage;
+  late String skuImage;
   late int gcsStatus;
   late int uploadStatus;
 
@@ -22,6 +23,7 @@ class EpscoSurveyListData {
     required this.transImageName,
     required this.sysOnYesGetValue,
     required this.sysOnYesGetImage,
+    required this.skuImage,
     required this.gcsStatus,
     required this.uploadStatus,
   });
@@ -37,6 +39,7 @@ class EpscoSurveyListData {
       'answer_images_name': transImageName,
       'on_yes_get_value': sysOnYesGetValue,
       'on_yes_get_image': sysOnYesGetImage,
+      'sku_img': skuImage,
       DbConstant.gcsStatus: gcsStatus,
       DbConstant.uploadStatus: uploadStatus,
     };

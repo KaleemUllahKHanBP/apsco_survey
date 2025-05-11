@@ -106,6 +106,7 @@ class LabeledTextFormField extends StatelessWidget {
   final bool obscureText;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
+  final bool requiredField;
 
   const LabeledTextFormField({
     super.key,
@@ -115,6 +116,7 @@ class LabeledTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.validator,
     this.onChanged,
+    this.requiredField = false, // Default to not required
   });
 
   @override
@@ -125,54 +127,57 @@ class LabeledTextFormField extends StatelessWidget {
       obscureText: obscureText,
       validator: validator,
       onChanged: onChanged,
-      cursorColor: appMainColorLight,
+      cursorColor: appMainColorDark,
       maxLines: 1,
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
-        labelText: hint,
-        labelStyle: const TextStyle(
-          color: appMainColorDark,
-          fontWeight: FontWeight.w400,
+        label: RichText(
+          text: TextSpan(
+            text: hint,
+            style: const TextStyle(
+              color: appMainColorDark,
+              fontWeight: FontWeight.w400,
+              fontSize: 16,
+            ),
+            children: requiredField
+                ? const [
+              TextSpan(
+                text: ' *',
+                style: TextStyle(
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ]
+                : [],
+          ),
         ),
         floatingLabelStyle: const TextStyle(
-          color: appMainColorLight,
+          color: appMainColorDark,
           fontWeight: FontWeight.bold,
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.white, width: 1),
-          borderRadius: BorderRadius.circular(8),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white, width: 1),
+          borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.lightBlueAccent.shade100, width: 1),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
         ),
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.redAccent, width: 1),
-          borderRadius: BorderRadius.circular(8),
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.redAccent, width: 1),
+          borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.redAccent, width: 1),
-          borderRadius: BorderRadius.circular(8),
+        focusedErrorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.redAccent, width: 1),
+          borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
       ),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -210,17 +215,29 @@ class CommentTextFormField extends StatelessWidget {
       onChanged: onChanged,
       cursorColor: appMainColorLight,
       maxLines: 1,
-        decoration: InputDecoration(
-            prefixIconColor: appMainColorDark,
-            focusColor: appMainColorDark,
-            fillColor: appMainColorDark,
-            labelStyle:
-            const TextStyle(color: appMainColorDark, height: 50.0),
-            focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                    width: 1, color: appMainColorDark)),
-            border: const OutlineInputBorder(),
-            labelText: hint),
+      decoration: InputDecoration(
+        prefixIconColor: appMainColorDark,
+        focusColor: appMainColorDark,
+        fillColor: appMainColorDark,
+        labelStyle: TextStyle(color: appMainColorDark.withOpacity(0.5), height: 1.5),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(width: 1, color: appMainColorDark),
+        ),
+        border: const OutlineInputBorder(),
+        label: RichText(
+          text: TextSpan(
+            text: hint,
+            style: const TextStyle(color: appMainColorDark, fontSize: 16.0),
+            children: const [
+              TextSpan(
+                text: ' *',
+                style: TextStyle(color: Colors.red,fontSize: 19,fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
+
 }

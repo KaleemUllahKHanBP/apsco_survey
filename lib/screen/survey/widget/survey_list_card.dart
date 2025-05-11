@@ -301,6 +301,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:survey/res/app_color.dart';
+import 'package:survey/utils/title_text.dart';
 import '../../../utils/img_list_button/img_list_button.dart';
 import '../../../utils/text_field.dart';
 import '../model/sys_survey_question_option_model.dart';
@@ -319,6 +320,7 @@ class SurveyQuestionCard extends StatelessWidget {
     required this.onYesGetValue,
     required this.onYesGetImage,
     required this.imagesList,
+    required this.skuImage,
     required this.valueControllerComment,
   });
 
@@ -331,6 +333,7 @@ class SurveyQuestionCard extends StatelessWidget {
   final String answerType;
   final String onYesGetValue;
   final String onYesGetImage;
+  final String skuImage;
   final dynamic selectedAnswerRadio;
   final ValueChanged<String>? onRadioSelect;
   final TextEditingController valueControllerComment;
@@ -351,6 +354,25 @@ class SurveyQuestionCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(13),
+                child: Image.network(
+                  skuImage,
+                  width: 180,
+                  height: 130,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return const Center(child: CircularProgressIndicator());
+                  },
+                  errorBuilder: (context, error, stackTrace) {
+                    return const SizedBox();
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(height: 15,),
             Padding(
               padding: const EdgeInsets.all(4),
               child: Column(
@@ -401,45 +423,35 @@ class SurveyQuestionCard extends StatelessWidget {
                       },
                       controller: valueControllerComment,
                       keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                          prefixIconColor: appMainColorDark,
-                          focusColor: appMainColorDark,
-                          fillColor: appMainColorDark,
-                          labelStyle:
-                          TextStyle(color: appMainColorDark, height: 50.0),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  width: 1, color: appMainColorDark)),
-                          border: OutlineInputBorder(),
-                          hintText: 'Please Enter value'),
-
+                      decoration:  InputDecoration(
+                        prefixIconColor: appMainColorDark,
+                        focusColor: appMainColorDark,
+                        fillColor: appMainColorDark,
+                        labelStyle:  const TextStyle(color: appMainColorDark, height: 1.5),
+                        focusedBorder:  const OutlineInputBorder(
+                          borderSide: BorderSide(width: 1, color: appMainColorDark),
+                        ),
+                        border: const OutlineInputBorder(),
+                        label: RichText(
+                          text: const TextSpan(
+                            text: 'Value ',
+                            style: TextStyle(color: appMainColorDark, fontSize: 16.0),
+                            children: [
+                              TextSpan(
+                                text: '*',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
+
                   if(answerType == "text")
                     CommentTextFormField(
                       hint: "Enter your comment",
                       controller: valueControllerComment,
                     ),
-                    // TextField(
-                    //   showCursor: true,
-                    //   enableInteractiveSelection: false,
-                    //   onChanged: (value) {
-                    //     print(value);
-                    //   },
-                    //   controller: valueControllerComment,
-                    //   keyboardType: TextInputType.text,
-                    //   decoration: const InputDecoration(
-                    //       prefixIconColor: appMainColorDark,
-                    //       focusColor: appMainColorDark,
-                    //       fillColor: appMainColorDark,
-                    //       labelStyle:
-                    //       TextStyle(color: appMainColorDark, height: 50.0),
-                    //       focusedBorder: OutlineInputBorder(
-                    //           borderSide: BorderSide(
-                    //               width: 1, color: appMainColorDark)),
-                    //       border: OutlineInputBorder(),
-                    //       hintText: 'Please Enter your comment'),
-                    //
-                    // ),
                   if(selectedAnswerRadio == "Yes" && onYesGetValue == "number")
                     TextField(
                       showCursor: true,
@@ -470,7 +482,7 @@ class SurveyQuestionCard extends StatelessWidget {
                   if(selectedAnswerRadio == "Yes" && onYesGetImage == "Y")
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 10),
-                      height: 150,
+                      height: 180,
                       width: double.infinity,
                       child: isImageLoading
                           ? const Center(
@@ -480,13 +492,13 @@ class SurveyQuestionCard extends StatelessWidget {
                         imageFile: imagesList,
                         onSelectImage: () {
                           getImage();
-                        },
+                        }, isRequried: true,
                       ),
                     ),
                   if(answerType == "number" && onYesGetImage == "Y")
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 10),
-                      height: 150,
+                      height: 180,
                       width: double.infinity,
                       child: isImageLoading
                           ? const Center(
@@ -496,13 +508,13 @@ class SurveyQuestionCard extends StatelessWidget {
                         imageFile: imagesList,
                         onSelectImage: () {
                           getImage();
-                        },
+                        }, isRequried: false,
                       ),
                     ),
                   if(answerType == "text" && onYesGetImage == "Y")
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 10),
-                      height: 150,
+                      height: 180,
                       width: double.infinity,
                       child: isImageLoading
                           ? const Center(
@@ -512,13 +524,13 @@ class SurveyQuestionCard extends StatelessWidget {
                         imageFile: imagesList,
                         onSelectImage: () {
                           getImage();
-                        },
+                        }, isRequried: false,
                       ),
                     ),
                   if(answerType == "image")
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 10),
-                      height: 150,
+                      height: 180,
                       width: double.infinity,
                       child: isImageLoading
                           ? const Center(
@@ -528,7 +540,7 @@ class SurveyQuestionCard extends StatelessWidget {
                         imageFile: imagesList,
                         onSelectImage: () {
                           getImage();
-                        },
+                        }, isRequried: true,
                       ),
                     ),
                 ],

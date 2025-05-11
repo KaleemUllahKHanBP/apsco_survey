@@ -27,7 +27,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
               Scaffold(
         backgroundColor: backgroundMain,
         appBar: MainAppBar(
-          title: "Survey",
+          title: "APSCO Survey",
           subTitle: controller.storeName.value,
           isShowLogout: true,
           showBackButton: false,
@@ -74,6 +74,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
                     getImage: () => controller.getImage(
                         controller.surveyQuestions[controller.currentIndex.value].id),
                     imagesList: controller.imagesList,
+                    skuImage: controller.surveyQuestions[controller.currentIndex.value].skuImage,
                   ),
                 ),
               ),
@@ -81,7 +82,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
               controller.isButtonLoading.value
                   ? const Center(
                 child: SizedBox(
-                  height: 60,
+                  height: 50,
                   child: CircularProgressIndicator(),
                 ),
               )

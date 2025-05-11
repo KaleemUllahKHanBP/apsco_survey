@@ -51,7 +51,6 @@ class SignInController extends GetxController{
       Utils.showSnackBar("Enter password", SnackType.error);
       return;
     }
-    isLoading.value = true;
     await Authentication()
         .loginUser(UserRequestModel(username: name.value.text, password: password.value.text))
         .then((value) async {

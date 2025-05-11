@@ -39,7 +39,12 @@ class SignInBody extends StatelessWidget {
         Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [const SizedBox(height:25),
-              const TitleText(title: "Username"),
+              const Row(
+                children: [
+                  TitleText(title: "Username ", color: Colors.black,),
+                  TitleText(title: "*", color: Colors.redAccent,)
+                ],
+              ),
               const SizedBox(
                 height: 5,
               ),
@@ -53,7 +58,12 @@ class SignInBody extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              const TitleText(title: "Password"),
+              const Row(
+                children: [
+                  TitleText(title: "Password ", color: Colors.black,),
+                  TitleText(title: "*", color: Colors.redAccent,)
+                ],
+              ),
               const SizedBox(height:5),
               Obx(() =>InputField(
                 onTap: () => controller.onFocusPassword(),

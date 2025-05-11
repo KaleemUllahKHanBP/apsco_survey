@@ -41,3 +41,4 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+assets/google_cloud_creds/appimages-keycstoreapp-7c0f4-a6d4c3e5b590.json

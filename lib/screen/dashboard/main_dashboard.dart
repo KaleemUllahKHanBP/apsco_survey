@@ -31,7 +31,7 @@ class _MainDashboardState extends State<MainDashboard> {
       backgroundColor: backgroundMain,
       appBar: const MainAppBar(
         title: "Dashboard",
-        subTitle: "Welcome to Apsco",
+        subTitle: "Welcome to APSCO Survey",
         isShowLogout: true,
         showBackButton: false,
       ),

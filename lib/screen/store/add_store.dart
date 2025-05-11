@@ -62,6 +62,7 @@ class _AddStoreScreen extends State<AddStoreScreen> {
                         LabeledTextFormField(
                           hint: "Enter store name",
                           controller: controller.storeName.value,
+                          requiredField: true,
                         ),
                         const SizedBox(height: 14),
                         // const TitleText(title: "Store City"),
@@ -105,6 +106,7 @@ class _AddStoreScreen extends State<AddStoreScreen> {
                         LabeledTextFormField(
                           hint: "Enter store district",
                           controller: controller.district.value,
+                          requiredField: true,
                         ),
                         const SizedBox(height: 14),
                         //const TitleText(title: "Store Area"),
@@ -114,6 +116,7 @@ class _AddStoreScreen extends State<AddStoreScreen> {
                         LabeledTextFormField(
                           hint: "Enter store area",
                           controller: controller.area.value,
+                          requiredField: true,
                         ),
                         const SizedBox(height: 14),
                         //const TitleText(title: "Store Street"),
@@ -123,6 +126,7 @@ class _AddStoreScreen extends State<AddStoreScreen> {
                         LabeledTextFormField(
                           hint: "Enter store street",
                           controller: controller.street.value,
+                          requiredField: true,
                         ),
                         const SizedBox(height: 14),
                         //const TitleText(title: "Approx. Store Space:"),
@@ -132,6 +136,7 @@ class _AddStoreScreen extends State<AddStoreScreen> {
                         LabeledTextFormField(
                           hint: "Enter store space",
                           controller: controller.approxSpace.value,
+                          requiredField: true,
                         ),
                         const SizedBox(height: 14),
                         //const TitleText(title: "Nationality"),
@@ -141,6 +146,7 @@ class _AddStoreScreen extends State<AddStoreScreen> {
                         LabeledTextFormField(
                           hint: "Enter nationality",
                           controller: controller.nationality.value,
+                          requiredField: true,
                         ),
                         const SizedBox(height: 14),
                         Container(

@@ -57,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen>
 
               // App Name
               Text(
-                "Apsco Survey",
+                "APSCO Survey",
                 style: GoogleFonts.vollkorn(
                   fontSize: 34,
                   fontWeight: FontWeight.w700,

@@ -16,13 +16,14 @@ class ImageRowButton extends StatelessWidget {
       children: [
         Column(
           children: [
-            Row(
+            const Row(
               children: [
-                Text("Take Photo".tr),
-                if(isRequired)
-                  const Text("*", style: TextStyle(
-                      color: appMainColorDark,
-                      fontWeight: FontWeight.bold,fontSize: 14),)
+                Text("Take Photo",style: TextStyle(
+        color: Colors.black,
+        fontWeight: FontWeight.bold,fontSize: 15),),
+                  Text(" *", style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,fontSize: 17),)
               ],
             ),
             SizedBox(
@@ -43,7 +44,9 @@ class ImageRowButton extends StatelessWidget {
         ),
         Column(
           children: [
-            Text("View Photo".tr),
+            const Text("View Photo",style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,fontSize: 15),),
             SizedBox(
               width: MediaQuery.of(context).size.width/2.4,
               height: MediaQuery.of(context).size.height/5.9,

@@ -40,6 +40,7 @@ class DatabaseHelper {
             ${DbConstant.sysSurveyArQuestion} TEXT,
             ${DbConstant.sysSurveyAnswerType} TEXT,
             ${DbConstant.sysOnYesGetValue} TEXT,
+            ${DbConstant.sysSurveySkuImage} TEXT,
             ${DbConstant.sysOnYesGetImage} TEXT
           )
         ''');
@@ -73,7 +74,7 @@ class DatabaseHelper {
       if (!isDuplicate) {
         String value =
             '("${data.id}", "${data.sysSurveyEnQuestion}", "${data.sysSurveyArQuestion}", '
-            '"${data.sysSurveyAnswerType}", "${data.sysOnYesGetValue}", '
+            '"${data.sysSurveyAnswerType}", "${data.sysOnYesGetValue}","${data.skuImage}", '
             '"${data.sysOnYesGetImage}")';
         valueList.add(value);
       } else {
@@ -90,6 +91,7 @@ class DatabaseHelper {
           ${DbConstant.sysSurveyArQuestion},
           ${DbConstant.sysSurveyAnswerType},
           ${DbConstant.sysOnYesGetValue},
+          ${DbConstant.sysSurveySkuImage},
           ${DbConstant.sysOnYesGetImage}
         ) VALUES $values
       ''';
@@ -128,6 +130,7 @@ class DatabaseHelper {
         transImageName: gtcSurveyMap[index]['answer_images_name'] ?? "",
         uploadStatus: gtcSurveyMap[index]['upload_status'] ?? 0,
         gcsStatus: gtcSurveyMap[index]['gcs_status'] ?? 0,
+          skuImage: gtcSurveyMap[index]['sku_img'] ?? ""
       );
     });
   }
@@ -154,6 +157,7 @@ class DatabaseHelper {
       transImageName: gtcSurveyMap[0]['answer_images_name'] ?? "",
       uploadStatus: gtcSurveyMap[0]['upload_status'] ?? 0,
       gcsStatus: gtcSurveyMap[0]['gcs_status'] ?? 0,
+      skuImage: gtcSurveyMap[0]['sku_img'] ?? ""
 
     );
   }

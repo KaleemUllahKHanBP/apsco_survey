@@ -24,6 +24,7 @@ class DbConstant {
   static const String sysOnYesGetImage = "on_yes_get_image";
   static const String transImageName = "answer_images_name";
   static const String sysSurveyQuestionType = "type";
+  static const String sysSurveySkuImage = "sku_img";
 
 
 // **************** Trans Column Names ****************

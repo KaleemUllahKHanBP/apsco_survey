@@ -479,9 +479,9 @@ class ApscoSurveyController extends GetxController {
     isDataLoading.value = true;
     await DatabaseHelper.getGtcSurveyDataList().then((value) async {
       surveyQuestions.value = value.cast<EpscoSurveyListData>();
-
+      print("++++++++++++++++++++++++++++++++");
+      print(jsonEncode(surveyQuestions));
       getTransSadafcoSurveyItemData();
-
       isDataLoading.value = false;
     });
   }
@@ -513,6 +513,7 @@ class ApscoSurveyController extends GetxController {
     String answerText = "";
     String selectedAnswerOption = "";
     String imagesName = "";
+    print("check sku image is     ${surveyQuestions[currentIndex.value].skuImage}");
     if (surveyQuestions[currentIndex.value].sysSurveyAnswerType == "radio") {
       if (answersRadio[currentIndex.value] == null ||
           answersRadio[currentIndex.value] == "") {
@@ -530,10 +531,7 @@ class ApscoSurveyController extends GetxController {
           }
         }
         if(surveyQuestions[currentIndex.value].sysOnYesGetImage == "Y") {
-          print(imagesNameList.length);
-          print(imagesList.length);
-          if (imagesList.isNotEmpty &&
-              imagesNameList.isNotEmpty &&
+          if (imagesList.isNotEmpty && imagesNameList.isNotEmpty &&
               imagesNameList.length == imagesList.length) {
             imagesName = imagesNameList.join(',');
           } else {
@@ -561,10 +559,6 @@ class ApscoSurveyController extends GetxController {
             imagesNameList.isNotEmpty &&
             imagesNameList.length == imagesList.length) {
           imagesName = imagesNameList.join(',');
-        } else {
-          Utils.showSnackBar(
-              "Please take at least one image", SnackType.error);
-          return;
         }
       }
     } else if(surveyQuestions[currentIndex.value].sysSurveyAnswerType == "image") {
@@ -657,6 +651,7 @@ class ApscoSurveyController extends GetxController {
       transImageName:  "",
       uploadStatus: 0,
       gcsStatus:  0,
+      skuImage: '',
     );
 
     imagesNameList.clear();

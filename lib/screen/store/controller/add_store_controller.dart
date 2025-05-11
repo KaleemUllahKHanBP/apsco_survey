@@ -203,6 +203,7 @@ class AddStoreController extends GetxController {
         PrefUtils.instance.setString(AppConstants.storeId,storeDetails.storeId);
         PrefUtils.instance.setString(AppConstants.storeName,storeDetails.storeName);
         final questions = result.data.questions;
+        print("Check Quesitions=========== ${jsonEncode(questions)}");
         DatabaseHelper.delete_table(DbConstant.sysTableEpscoQuestion);
         DatabaseHelper.delete_table(DbConstant.transTableEpscoAnswer);
         if (await DatabaseHelper.insertSysEpscoQuestionArray(questions)) {
@@ -223,7 +224,7 @@ class AddStoreController extends GetxController {
       } else {
         isLoading.value=false;
         Utils.showSnackBar(result.msg, SnackType.error);
-        print("API returned error: ${result.msg}");
+        print("error: ${result.msg}");
       }
     });
   }
