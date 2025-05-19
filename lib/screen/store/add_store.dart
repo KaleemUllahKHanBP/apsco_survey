@@ -5,10 +5,13 @@ import 'package:survey/res/app_color.dart';
 import 'package:survey/screen/store/controller/add_store_controller.dart';
 import '../../../utils/services/location_services.dart';
 
+import '../../db_helper/db_constant.dart';
+import '../../db_helper/db_helper.dart';
 import '../../utils/appbar/main_appbar.dart';
 import '../../utils/auth_button.dart';
 import '../../utils/image_selection_row_button.dart';
-import '../../utils/text_field.dart';
+
+import '../../utils/username_textfield.dart';
 import '../../utils/utils.dart';
 import 'drop_down/city_drop_down.dart';
 
@@ -44,35 +47,16 @@ class _AddStoreScreen extends State<AddStoreScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 10,),
-                      Text(
-                        'Add Store Detail',
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 23,
-                          color: appMainColorDark,
-                        ),
-                      ),
+                      const SizedBox(height: 5,),
                       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        const SizedBox(height: 25),
-                        //const TitleText(title: "Store Name"),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        LabeledTextFormField(
-                          hint: "Enter store name",
+                        const SizedBox(height: 15),
+                        UserNameTextField(
                           controller: controller.storeName.value,
-                          requiredField: true,
+                          title: 'Store Name ',
+                          hint: 'Enter store name',
+                          isIconShow: false,
                         ),
                         const SizedBox(height: 14),
-                        // const TitleText(title: "Store City"),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        // LabeledTextFormField(
-                        //   hint: "Enter store city",
-                        //   controller: controller.city.value,
-                        // ),
                         RegionListDropDown(
                             initialValue: controller.selectedRegion.value,
                             clientKey: controller.regionKey,
@@ -92,7 +76,7 @@ class _AddStoreScreen extends State<AddStoreScreen> {
                             child: CircularProgressIndicator(),
                           ),
                         ):
-                        CityListDropDown(
+                        RegionListDropDown(
                             initialValue: controller.selectedCity.value,
                             clientKey: controller.cityKey,
                             hintText: "Select City".tr,
@@ -101,56 +85,42 @@ class _AddStoreScreen extends State<AddStoreScreen> {
                               controller.selectedCity.value = value;
                             }),
                         const SizedBox(height: 14),
-                        //const TitleText(title: "Store District"),
-
-                        LabeledTextFormField(
-                          hint: "Enter store district",
+                        UserNameTextField(
                           controller: controller.district.value,
-                          requiredField: true,
+                          title: 'District ',
+                          hint: 'Enter store district',
+                          isIconShow: false,
                         ),
                         const SizedBox(height: 14),
-                        //const TitleText(title: "Store Area"),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        LabeledTextFormField(
-                          hint: "Enter store area",
+                        UserNameTextField(
                           controller: controller.area.value,
-                          requiredField: true,
+                          title: 'Area ',
+                          hint: 'Enter store area',
+                          isIconShow: false,
                         ),
                         const SizedBox(height: 14),
-                        //const TitleText(title: "Store Street"),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        LabeledTextFormField(
-                          hint: "Enter store street",
+                        UserNameTextField(
                           controller: controller.street.value,
-                          requiredField: true,
+                          title: 'Street ',
+                          hint: 'Enter store street',
+                          isIconShow: false,
                         ),
                         const SizedBox(height: 14),
-                        //const TitleText(title: "Approx. Store Space:"),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        LabeledTextFormField(
-                          hint: "Enter store space",
+                        UserNameTextField(
                           controller: controller.approxSpace.value,
-                          requiredField: true,
+                          title: 'Space ',
+                          hint: 'Enter store space',
+                          isIconShow: false,
                         ),
                         const SizedBox(height: 14),
-                        //const TitleText(title: "Nationality"),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        LabeledTextFormField(
-                          hint: "Enter nationality",
+                        UserNameTextField(
                           controller: controller.nationality.value,
-                          requiredField: true,
+                          title: 'Nationality ',
+                          hint: 'Enter nationality',
+                          isIconShow: false,
                         ),
-                        const SizedBox(height: 14),
                         Container(
-                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          margin: const EdgeInsets.symmetric(vertical: 20),
                           child: ImageRowButton(
                               isRequired: false,
                               imagePath: controller.imagePath.value,
@@ -161,9 +131,11 @@ class _AddStoreScreen extends State<AddStoreScreen> {
 
                       ]),
                       AccountButton(
-                        text: " Add ",
+                        text: " Save ",
                         loading: controller.isLoading.value,
                         onTap: () {
+                          DatabaseHelper.delete_table(DbConstant.sysTableEpscoQuestion);
+                          DatabaseHelper.delete_table(DbConstant.transTableEpscoAnswer);
                           LocationService.getLocation().then((value) async => {
                             if (value["locationIsPicked"]) {
                               print("User Lat Long"),

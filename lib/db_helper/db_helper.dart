@@ -264,6 +264,11 @@ class DatabaseHelper {
     var db = await DatabaseHelper().database;
     await db.rawDelete('DELETE FROM $tbl_name');
   }
+  //----******** delete Image ********------------
+  // static Future<void> deleteImage(String id) async {
+  //   var db = await DatabaseHelper().database;
+  //   await db.rawDelete('UPDATE trans_epsco_answers SET answer_images_name = 'abc' Where id=1');
+  // }
   // Check for duplicate entry
   static Future<bool> hasDuplicateEntry(
       Database db, String DbConstant, Map<String, dynamic> fields) async {

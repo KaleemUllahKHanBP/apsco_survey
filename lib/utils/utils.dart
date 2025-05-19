@@ -1,39 +1,8 @@
-// import 'package:email_validator/email_validator.dart';
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import '../res/app_color.dart';
-// class Utils{
-//   static bool validateEmail(String email){
-//     return EmailValidator.validate(email);
-//   }
-//   static void showSnackBar(String title,String message,Widget icon){
-//    Get.showSnackbar(
-//      GetSnackBar(
-//        backgroundColor: primaryColorSnack,
-//        title: title,
-//        isDismissible: true,
-//        duration: const Duration(milliseconds: 2000),
-//        icon: icon,
-//        message: message,
-//        snackPosition: SnackPosition.BOTTOM,
-//        borderRadius: 20,
-//        margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-//        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
-//        snackStyle: SnackStyle.GROUNDED,
-//        barBlur: 30,
-//      )
-//    );
-//   }
-// }
-
-
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../res/app_color.dart';
-
 enum SnackType { success, error, info }
-
 class Utils {
   static bool validateEmail(String email) {
     return EmailValidator.validate(email);
@@ -70,7 +39,7 @@ class Utils {
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         borderRadius: 12,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-        snackPosition: SnackPosition.BOTTOM,
+        snackPosition: SnackPosition.TOP,
         isDismissible: true,
         barBlur: 10,
         messageText: Row(

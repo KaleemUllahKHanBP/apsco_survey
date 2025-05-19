@@ -8,7 +8,7 @@ class SignIn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:backgroundMain ,
-      appBar: const MainAppBar(title: "Login",isShowLogout: false,),
+      appBar: const MainAppBar(title: "Login",isShowLogout: false,showBackButton: false,),
       body: SafeArea(
         child: SignInBody(),
       ),

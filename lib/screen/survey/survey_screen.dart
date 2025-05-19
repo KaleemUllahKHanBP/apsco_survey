@@ -97,6 +97,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
                     SmallButton(
                       text: "Previous",
                       isFilled: false,
+                      isLoading:controller.isButtonLoading.value,
                       onPressed: controller.currentIndex > 0
                           ? controller.previousSurvey
                           : null,
@@ -104,6 +105,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
                     ),
                     SmallButton(
                       text: "  Next   ",
+                      isLoading:controller.isButtonLoading.value,
                       onPressed: (){
                         if (controller.currentIndex < controller.surveyQuestions.length - 1) {
                           controller.nextSurvey(context);

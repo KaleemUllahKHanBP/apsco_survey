@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:survey/utils/app_constants.dart';
@@ -12,32 +11,12 @@ import '../model/login_response_model.dart';
 import '../network_auth/authentication.dart';
 
 class SignInController extends GetxController{
-  RxBool nameFocus=false.obs;
-  RxBool passwordFocus=false.obs;
-  RxBool correctName=false.obs;
-  RxBool showPassword=true.obs;
   RxBool loading=false.obs;
   final name=TextEditingController().obs;
   final password=TextEditingController().obs;
   RxBool isLoading = false.obs;
   late LoginResponseModel loginResponseData;
   late UserData userData;
-  void setLoading(bool value){
-    loading.value=value;
-  }
-  void onFocusName(){
-    nameFocus.value=true;
-    passwordFocus.value=false;
-  }
-  void onFocusPassword(){
-    nameFocus.value=false;
-    passwordFocus.value=true;
-  }
-  void onTapOutside(BuildContext context){
-    nameFocus.value=false;
-    passwordFocus.value=false;
-    FocusScope.of(context).unfocus();
-  }
 
   submitForm(BuildContext context) async {
     isLoading.value = true;

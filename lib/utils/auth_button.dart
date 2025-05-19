@@ -19,11 +19,10 @@ class AccountButton extends StatelessWidget {
           height: 58,
           width: double.infinity,
           alignment: Alignment.center,
-          margin: const EdgeInsets.symmetric(horizontal: 6),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(5),
               gradient: const LinearGradient(
-                  colors: [appMainColorDark, appMainColorLight])
+                  colors: [appMainColorDark, appMainColorDark])
           ),
           child: loading
               ? const SizedBox(

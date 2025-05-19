@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../res/app_color.dart';
+import '../../screen/survey/controller/survery_controller.dart';
 
-class FinsihSurveyDialog {
-  static void show(BuildContext context, VoidCallback finishSurvey, {VoidCallback? onConfirm}) {
+class DeleteDialog {
+  static void show(
+      BuildContext context, {
+        required int imageName,
+        VoidCallback? onConfirm,
+      }) {
+    final ApscoSurveyController controller = Get.find<ApscoSurveyController>();
+
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -16,20 +24,19 @@ class FinsihSurveyDialog {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Icon + Title
                 Column(
                   children: [
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: appMainColorDark.withOpacity(0.1),
+                        color: Colors.red.shade100,
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.done_all, size: 30, color: appMainColorDark),
+                      child: const Icon(Icons.delete, size: 30, color: Colors.red),
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      "Finsih?",
+                      "Delete?",
                       style: GoogleFonts.poppins(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -38,7 +45,7 @@ class FinsihSurveyDialog {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      "Are you sure you want to finish the survey?",
+                      "Are you sure you want to delete this image?",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                         fontSize: 14,
@@ -48,9 +55,7 @@ class FinsihSurveyDialog {
                     ),
                   ],
                 ),
-
                 const SizedBox(height: 12),
-                // Buttons
                 Row(
                   children: [
                     Expanded(
@@ -76,8 +81,9 @@ class FinsihSurveyDialog {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          finishSurvey();
-                          Navigator.pop(context);
+                          controller.deleteImage(imageName);
+                          print("On Delete call");
+                          Get.back();
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: appMainColorDark,
@@ -87,7 +93,7 @@ class FinsihSurveyDialog {
                           ),
                         ),
                         child: Text(
-                          "Finish",
+                          "Delete",
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w600,
                             color: Colors.white,
@@ -105,4 +111,3 @@ class FinsihSurveyDialog {
     );
   }
 }
-

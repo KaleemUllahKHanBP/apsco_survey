@@ -114,12 +114,6 @@ class AddStoreController extends GetxController {
     }
   }
 
-
-
-
-
-
-
   Future<void> getRegionListData() async {
     isRegionLoading.value=true;
     final httpManager = HTTPManager();

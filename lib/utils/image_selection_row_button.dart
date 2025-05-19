@@ -2,15 +2,23 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:survey/res/app_color.dart';
-
 class ImageRowButton extends StatelessWidget {
-  const ImageRowButton({super.key,required this.imagePath,required this.onSelectImage,required this.isRequired});
+  const ImageRowButton({
+    super.key,
+    required this.imagePath,
+    required this.onSelectImage,
+    required this.isRequired,
+  });
+
   final String? imagePath;
   final Function onSelectImage;
   final bool isRequired;
 
   @override
   Widget build(BuildContext context) {
+    final imageBoxWidth = MediaQuery.of(context).size.width / 2.4;
+    final imageBoxHeight = MediaQuery.of(context).size.height / 5.9;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -18,25 +26,34 @@ class ImageRowButton extends StatelessWidget {
           children: [
             const Row(
               children: [
-                Text("Take Photo",style: TextStyle(
-        color: Colors.black,
-        fontWeight: FontWeight.bold,fontSize: 15),),
-                  Text(" *", style: TextStyle(
+                Text(
+                  "Take Photo",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15),
+                ),
+                Text(
+                  " *",
+                  style: TextStyle(
                       color: Colors.red,
-                      fontWeight: FontWeight.bold,fontSize: 17),)
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17),
+                )
               ],
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width/2.4,
-              height: MediaQuery.of(context).size.height/5.9,
+              width: imageBoxWidth,
+              height: imageBoxHeight,
               child: InkWell(
-                onTap: () {
-                  onSelectImage();
-                },
+                onTap: () => onSelectImage(),
                 child: Card(
                   color: Colors.white,
-                  elevation: 1,
-                  child: Icon(Icons.camera_alt_rounded,size: 100,color: Colors.grey.shade200,),
+                  child: Icon(
+                    Icons.camera_alt_rounded,
+                    size: 100,
+                    color: Colors.grey.shade300,
+                  ),
                 ),
               ),
             ),
@@ -44,19 +61,33 @@ class ImageRowButton extends StatelessWidget {
         ),
         Column(
           children: [
-            const Text("View Photo",style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,fontSize: 15),),
+            const Text(
+              "View Photo",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15),
+            ),
             SizedBox(
-              width: MediaQuery.of(context).size.width/2.4,
-              height: MediaQuery.of(context).size.height/5.9,
+              width: imageBoxWidth,
+              height: imageBoxHeight,
               child: Card(
                 color: Colors.white,
                 elevation: 1,
-                child: imagePath != ""? Image.file(File(imagePath!),fit: BoxFit.fill,) :
-                Icon(Icons.image_outlined,size: 100,color: Colors.grey.shade200,),
+                child: imagePath != ""
+                    ? ClipRRect(
+                  borderRadius: BorderRadius.circular(9),
+                  child: Image.file(
+                    File(imagePath!),
+                    fit: BoxFit.cover,
+                  ),
+                )
+                    : Icon(
+                  Icons.image_outlined,
+                  size: 100,
+                  color: Colors.grey.shade300,
+                ),
               ),
-
             ),
           ],
         ),
@@ -64,6 +95,7 @@ class ImageRowButton extends StatelessWidget {
     );
   }
 }
+
 class ImageListButton extends StatelessWidget {
   const ImageListButton({super.key,required this.imageFile,required this.isDeleteShow,required this.onDeleteItem,required this.onSelectImage,required this.onGalleryList});
   final List<File> imageFile;

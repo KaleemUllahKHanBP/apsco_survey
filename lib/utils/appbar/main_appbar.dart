@@ -91,13 +91,13 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       titleSpacing: 0,
       title: Row(
         children: [
-          if (showBackButton)
+         showBackButton?
             IconButton(
               icon: const Icon(Icons.keyboard_arrow_left_outlined, color: Colors.white),
               onPressed: onBackPressed ?? () {
                 Navigator.of(context).maybePop();
               },
-            ),
+            ):const SizedBox(width: 9,),
           Expanded(
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),

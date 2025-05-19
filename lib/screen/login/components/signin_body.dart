@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:survey/res/app_color.dart';
-import '../../../../../res/routes/routes.dart';
 import '../../../../../utils/auth_button.dart';
-import '../../../../../utils/text_field.dart';
-import '../../../utils/title_text.dart';
+import '../../../utils/password_textfield.dart';
+import '../../../utils/username_textfield.dart';
 import '../controller/signin_controller.dart';
 class SignInBody extends StatelessWidget {
   SignInBody({super.key});
@@ -22,10 +21,11 @@ class SignInBody extends StatelessWidget {
           children: [
             Center(
               child: SizedBox(
-                  width: 160,
-                  height: 160,
+                  width: 180,
+                  height: 180,
                   child: Image.asset("assets/images/logo.png")),
             ),
+            const SizedBox(height: 10,),
             Text(
               'LOG IN',
               style: GoogleFonts.poppins(fontWeight: FontWeight.w600,fontSize:26,
@@ -34,48 +34,24 @@ class SignInBody extends StatelessWidget {
             Text(
               'Login to your account',
               style: GoogleFonts.poppins(fontWeight: FontWeight.w500,fontSize:16,
-                color: appMainColorLight,),
+                color: Colors.black,),
             ),
         Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [const SizedBox(height:25),
-              const Row(
-                children: [
-                  TitleText(title: "Username ", color: Colors.black,),
-                  TitleText(title: "*", color: Colors.redAccent,)
-                ],
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Obx(() => InputField(
-                onTap: () => controller.onFocusName(),
-                focus: controller.nameFocus.value,
-                hint: "Enter username",
+              UserNameTextField(
                 controller: controller.name.value,
-              )
+                title: 'Username ',
+                hint: 'Enter username',
+                isIconShow: true,
               ),
               const SizedBox(
-                height: 5,
+                height: 20,
               ),
-              const Row(
-                children: [
-                  TitleText(title: "Password ", color: Colors.black,),
-                  TitleText(title: "*", color: Colors.redAccent,)
-                ],
-              ),
-              const SizedBox(height:5),
-              Obx(() =>InputField(
-                onTap: () => controller.onFocusPassword(),
-                focus: controller.passwordFocus.value,
-                hint: "Enter password",
+              PasswordTextField(
                 controller: controller.password.value,
-                hideText: controller.showPassword.value,
-                onChange: () {},
-                showPass: () => controller.showPassword.toggle(),
               ),
-              ),
-              const SizedBox(height:20)]
+              const SizedBox(height:17)]
         ),
           AccountButton(
                 text: "Login",
